@@ -24,12 +24,12 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Realodix\\Assert\\": "src/"
+			"Realodix\\Assert\\": "src"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Realodix\\Assert\\Test\\": "tests/phpunit/"
+			"Realodix\\Assert\\Tests\\": "tests"
 		}
 	}
 }

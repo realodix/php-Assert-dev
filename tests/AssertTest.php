@@ -1,6 +1,6 @@
 <?php
 
-namespace Realodix\Assert\Test;
+namespace Realodix\Assert\Tests;
 
 use ArrayObject;
 use LogicException;
