@@ -34,16 +34,28 @@ class Assert
      * @param mixed           $value The parameter's actual value.
      * @param string          $name  The name of the parameter that was checked.
      *
-     * @throws ParameterTypeException if $value is not of type (or, for objects, is not an
-     *                                instance of) $type.
+     * @throws \InvalidArgumentException
      */
-    public static function isType($types, $value, string $name): void
+    public static function isType($types, $value, string $name, int $argument = 1): void
     {
         if (is_string($types)) {
             $types = explode('|', $types);
         }
+
+        $stack = debug_backtrace();
+        $typeGiven = implode('|', $types);
+
+        $invalidArgument = sprintf(
+            'Argument #%d of %s() must be %s %s, %s given',
+            $argument,
+            $stack[1]['function'],
+            \in_array(lcfirst($typeGiven)[0], ['a', 'e', 'i', 'o', 'u'], true) ? 'an' : 'a',
+            $typeGiven,
+            get_debug_type($value) // symfony/polyfill-php80
+        );
+
         if (! self::hasType($value, $types)) {
-            throw new ParameterTypeException($name, implode('|', $types));
+            throw new \InvalidArgumentException($invalidArgument);
         }
     }
 

@@ -7,7 +7,6 @@ use LogicException;
 use PHPUnit\Framework\TestCase;
 use Realodix\Assert\Assert;
 use Realodix\Assert\ParameterAssertionException;
-use Realodix\Assert\ParameterTypeException;
 use RuntimeException;
 use stdClass;
 
@@ -114,20 +113,14 @@ class AssertTest extends TestCase
 
     /**
      * @dataProvider invalidParameterTypeProvider
-     * @covers \Realodix\Assert\ParameterTypeException
      *
      * @param mixed $type
      * @param mixed $value
      */
     public function testParameterTypeFail($type, $value)
     {
-        try {
-            Assert::isType($type, $value, 'test');
-            $this->fail('Expected ParameterTypeException');
-        } catch (ParameterTypeException $ex) {
-            $this->assertSame($type, $ex->getParameterType());
-            $this->assertSame('test', $ex->getParameterName());
-        }
+        $this->expectException(\InvalidArgumentException::class);
+        Assert::isType($type, $value, 'test');
     }
 
     /**
@@ -135,7 +128,7 @@ class AssertTest extends TestCase
      */
     public function testParameterTypeCatch()
     {
-        $this->expectException(ParameterAssertionException::class);
+        $this->expectException(\InvalidArgumentException::class);
         Assert::isType('string', 17, 'test');
     }
 }
