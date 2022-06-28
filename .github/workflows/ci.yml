@@ -6,17 +6,17 @@ on:
 
 jobs:
   build:
+    name: PHP ${{ matrix.php-version }} (${{ matrix.stability }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         php-version: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1']
+        stability: [lowest, stable]
         include:
           - php-version: '8.2'
             flags: "--ignore-platform-req=php"
-            stability: prefer-stable
-
-    name: PHP ${{ matrix.php-version }}
+            stability: stable
 
     steps:
       - name: Checkout
@@ -47,7 +47,7 @@ jobs:
           max_attempts: 5
           command: |
               composer -V
-              composer update --prefer-dist --no-interaction --no-progress ${{ matrix.flags }}
+              composer require phpunit/phpunit >=9 --prefer-${{ matrix.stability }} --no-interaction --no-progress ${{ matrix.flags }}
       - name: Execute tests
         run: |
           if ${{ matrix.php-version >= 7.3 }}; then
