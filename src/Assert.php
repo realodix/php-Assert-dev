@@ -73,7 +73,8 @@ class Assert
         }
 
         if ((is_object($value) && self::isInstanceOf($value, $allowedTypes))
-            || (in_array('callable', $allowedTypes) && is_callable($value))) {
+            || (in_array('callable', $allowedTypes) && is_callable($value))
+            || (in_array('callback', $allowedTypes) && is_callable($value))) {
             return true;
         }
 

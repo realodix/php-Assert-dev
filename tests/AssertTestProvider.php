@@ -33,11 +33,16 @@ trait AssertTestProvider
             'multi (old)' => ['string|array|Closure', $staticFunction],
             'null'        => [['integer', 'null'], null],
 
-            'callable'            => [['null', 'callable'], 'time'],
-            'static callable'     => ['callable', 'Realodix\Assert\Assert::isType'],
-            'callable array'      => ['callable', ['Realodix\Assert\Assert', 'isType']],
-            'callable $this'      => ['callable', [$this, 'validIsTypeProvider']],
-            'Closure is callable' => ['callable', $staticFunction],
+            'callable'                     => [['null', 'callable'], 'time'],
+            'static callable'              => ['callable', 'Realodix\Assert\Assert::isType'],
+            'callable array'               => ['callable', ['Realodix\Assert\Assert', 'isType']],
+            'callable $this'               => ['callable', [$this, 'validIsTypeProvider']],
+            'Closure is callable'          => ['callable', $staticFunction],
+            'callable_callback'            => [['null', 'callback'], 'time'],
+            'static callable_callback'     => ['callback', 'Realodix\Assert\Assert::isType'],
+            'callable_callback array'      => ['callback', ['Realodix\Assert\Assert', 'isType']],
+            'callable_callback $this'      => ['callback', [$this, 'validIsTypeProvider']],
+            'Closure is callable_callback' => ['callback', $staticFunction],
 
             'Traversable' => ['traversable', new ArrayObject],
         ];
@@ -49,7 +54,7 @@ trait AssertTestProvider
             // 'bool shortcut is not accepted'  => ['bool', true],
             // 'int shortcut is not accepted'   => ['int', 1],
             // 'float alias is not accepted'    => ['float', 1.0],
-            'callback alias is not accepted' => ['callback', 'time'],
+            // 'callback alias is not accepted' => ['callback', 'time'],
 
             'simple'                    => ['string', 5],
             'integer is not boolean'    => ['boolean', 1],
