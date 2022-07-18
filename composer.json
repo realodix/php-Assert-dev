@@ -20,7 +20,7 @@
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^7|^8|^9",
-        "realodix/cs-config": "1.0.x-dev|1.x-dev"
+        "realodix/cs-config": "1.0.x-dev|1.1.x-dev"
 	},
 	"autoload": {
 		"psr-4": {
